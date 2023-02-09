@@ -17,6 +17,6 @@ public class GenreService{
 
     public List<GenreDto> findAll(){
         List<Genre> list = genreRepository.findAll();
-        return list.stream().map(x -> new GenreDto()).collect(Collectors.toList());
+        return list.stream().map(x -> new GenreDto(x)).collect(Collectors.toList());
     }
 }

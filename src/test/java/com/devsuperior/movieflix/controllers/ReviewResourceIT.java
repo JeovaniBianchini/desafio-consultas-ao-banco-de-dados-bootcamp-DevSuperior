@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.devsuperior.movieflix.dtos.ReviewDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.movieflix.dto.ReviewDTO;
+
 import com.devsuperior.movieflix.tests.TokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -49,11 +50,11 @@ public class ReviewResourceIT {
 	@Test
 	public void insertShouldReturnUnauthorizedWhenNotValidToken() throws Exception {
 
-		ReviewDTO reviewDTO = new ReviewDTO();
-		reviewDTO.setText("Gostei do filme!");
-		reviewDTO.setMovieId(1L);
+		ReviewDto reviewDto = new ReviewDto();
+		reviewDto.setText("Gostei do filme!");
+		reviewDto.setMovieId(1L);
 
-		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
+		String jsonBody = objectMapper.writeValueAsString(reviewDto);
 		
 		ResultActions result =
 				mockMvc.perform(post("/reviews")
@@ -69,7 +70,7 @@ public class ReviewResourceIT {
 	
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, visitorUsername, visitorPassword);
 		
-		ReviewDTO reviewDTO = new ReviewDTO();
+		ReviewDto reviewDTO = new ReviewDto();
 		reviewDTO.setText("Gostei do filme!");
 		reviewDTO.setMovieId(1L);
 
@@ -93,7 +94,7 @@ public class ReviewResourceIT {
 		String reviewText = "Gostei do filme!";
 		long movieId = 1L;
 		
-		ReviewDTO reviewDTO = new ReviewDTO();
+		ReviewDto reviewDTO = new ReviewDto();
 		reviewDTO.setText(reviewText);
 		reviewDTO.setMovieId(movieId);
 
@@ -123,7 +124,7 @@ public class ReviewResourceIT {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
 		
-		ReviewDTO reviewDTO = new ReviewDTO();
+		ReviewDto reviewDTO = new ReviewDto();
 		reviewDTO.setText("        ");
 		reviewDTO.setMovieId(1L);
 
