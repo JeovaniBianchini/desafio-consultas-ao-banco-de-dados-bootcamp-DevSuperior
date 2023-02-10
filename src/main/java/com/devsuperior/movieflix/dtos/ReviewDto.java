@@ -2,12 +2,16 @@ package com.devsuperior.movieflix.dtos;
 
 import com.devsuperior.movieflix.entities.Review;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class ReviewDto implements Serializable {
 
     private Long id;
+    @NotBlank(message = "Campo requerido")
     private String text;
+    @NotNull(message = "Campo requerido")
     private Long movieId;
     private UserDto user;
 
@@ -21,11 +25,11 @@ public class ReviewDto implements Serializable {
         this.user = user;
     }
 
-    public ReviewDto(Review review, UserDto dto) {
+    public ReviewDto(Review review, UserDto userDto) {
         id = review.getId();
         text = review.getText();
         movieId = review.getMovie().getId();
-        user = dto;
+        user = userDto;
     }
 
     public Long getId() {

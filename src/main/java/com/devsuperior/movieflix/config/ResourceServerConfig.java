@@ -35,6 +35,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = {"/oauth/token", "/h2-console/**"};
 
+    private static final String[] MEMBER_OU_VISITOR = {"/movies/**", "/genres/**", "/reviews/**"};
+
 
 
     @Override
@@ -52,6 +54,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC).permitAll()
+                .antMatchers(HttpMethod.GET, MEMBER_OU_VISITOR).permitAll()
+                .antMatchers(HttpMethod.POST, MEMBER_OU_VISITOR).hasRole("MEMBER")
                 .anyRequest().authenticated();
 
         http.cors().configurationSource(corsConfigurationSource());
